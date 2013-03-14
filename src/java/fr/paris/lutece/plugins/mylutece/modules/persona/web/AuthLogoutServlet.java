@@ -45,9 +45,10 @@ public class AuthLogoutServlet extends HttpServlet
 {
 
     @Override
-    protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
+    protected void service( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
-        super.doPost( request, response );
+        System.out.println( "AuthLogout:doPost" );
+        super.service( request, response );
     }
     
     

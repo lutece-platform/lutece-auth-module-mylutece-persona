@@ -33,13 +33,13 @@
         
         <servlet>
             <servlet-name>personaAuthLogin</servlet-name>
-            <url-pattern>/servlet/plugins/mylutece/modules/persona/auth/login/</url-pattern>
+            <url-pattern>/servlet/plugins/mylutece/modules/persona/auth/login</url-pattern>
             <servlet-class>fr.paris.lutece.plugins.mylutece.modules.persona.web.AuthLoginServlet</servlet-class>
         </servlet>
         
         <servlet>
             <servlet-name>personaAuthLogout</servlet-name>
-            <url-pattern>/servlet/plugins/mylutece/modules/persona/auth/logout/</url-pattern>
+            <url-pattern>/servlet/plugins/mylutece/modules/persona/auth/logout</url-pattern>
             <servlet-class>fr.paris.lutece.plugins.mylutece.modules.persona.web.AuthLogoutServlet</servlet-class>
         </servlet>
 
