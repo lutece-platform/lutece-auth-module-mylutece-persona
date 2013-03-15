@@ -62,8 +62,6 @@ public class AuthLoginServlet extends HttpServlet
     protected void service( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
-        System.out.println( "AuthLogin:doPost" );
-
         super.service( request, response );
 
         String strAssertion = request.getParameter( PARAMETER_ASSERTION );

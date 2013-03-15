@@ -35,12 +35,13 @@ package fr.paris.lutece.plugins.mylutece.modules.persona.authentication;
 
 import fr.paris.lutece.portal.service.security.LuteceAuthentication;
 import fr.paris.lutece.portal.service.security.LuteceUser;
+import java.io.Serializable;
 
 
 /**
  * This class implements The Lutece User in a OpenID configuration.
  */
-public class PersonaUser extends LuteceUser
+public class PersonaUser extends LuteceUser implements Serializable
 {
     /**
      * Constructor

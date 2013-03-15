@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <title>Module mylutece persona</title>
+    </properties>
+    <body>
+        <section name="Module mylutece persona">
+            <p>
+                <img src="images/persona.png" />
+            </p>
+            <subsection name="Introduction">
+                <p>This module let use Persona to authenticate users in Lutece</p>
+                <p>All users having an Persona account can be authenticated by this module. Users who have not already
+                    an Persona should create one.
+                
+                </p>
+                <p>
+                    For more information about Persona please refer to links provided in the side bar. 
+                </p>
+            </subsection>
+        </section>
+        
+        <section name="Installation">
+            <subsection name="Requirements">
+                <p>This module requires version 2.1.2 or higher of the Lutece kernel (lutece-core)</p>
+                <p>The plugin MyLutece should be installed in version 2.1.0 or higher</p>
+            </subsection>
+            
+            
+            <subsection name="Build and deploy">
+                <p>
+                    To build the latest version just follow this steps 
+                </p>
+                <p>
+                    (NB: Subversion's client and Maven3 should be installed on your system)
+                </p>
+                <p>                       
+                    <div class="source">
+<pre>
+  $ svn export http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/module-mylutece-persona module-mylutece-persona
+  $ cd module-mylutece-persona
+  $ mvn lutece:assembly
+</pre>
+                    </div>
+                </p>
+                <p>
+                    The last command will build the module's package as an archive named <code>module-mylutece-persona-xxx-bin-xxxx.zip</code>
+                    in the directory <code>./target/assembly</code>
+                </p>
+                <p>
+                    To deploy this package, just extract its content in your webapp's root.
+                </p>
+
+            </subsection>
+            <subsection name="Configuration">
+                <p>As soon as the module has been extracted in the webapp, just activate it in the "Plugins management" feature of the Lutece backoffice</p>
+                <p>
+                    Check in the file <code>WEB-INF/conf/plugins/mylutece.properties</code> that 
+                    the authentication is correctly enabled as follows :
+                </p>
+                <p>                       
+                    <div class="source">
+<pre>
+# Enable authentication
+mylutece.authentication.enable=true
+
+mylutece.authentication.class=fr.paris.lutece.plugins.mylutece.modules.persona.authentication.PersonaAuthentication
+
+mylutece.url.login.page=Portal.jsp?page=persona
+mylutece.url.doLogout=servlet/plugins/mylutece/modules/persona/auth/logout
+mylutece.url.default.redirect=../../Portal.jsp
+</pre>
+                    </div>
+                </p>
+
+            </subsection>
+            <subsection name="Usage">
+                <p>The Persona authentication page is called by the following URL :</p>
+                <p>
+                    <code>http://myhost/lutece/jsp/site/Portal.jsp?<strong>page=persona</strong></code>
+                </p>
+                <p>
+                    You may create an authentication form in a portlet, by copying the form in an HTML portlet, or
+                    by modifying the MyLutece XSL default stylesheet.
+                </p>
+            </subsection>
+            <subsection name="Troubleshooting">
+                <p>
+                    <ul>
+                        <li>Check the MyLutece configuration as above.</li>
+                        <li>
+                            Check that Persona module is the only MyLutece module of the webapp.
+                            It should exist no other file <code>mylutece-xxxxx.properties</code> 
+                            in the <code>WEB-INF/conf/plugins/</code> directory.
+                        </li>
+                        <li>
+                            Activate debug logging by adding the following line in the
+                            file <code>WEB-INF/conf/config.properties</code> in the LOGGERS bloc.
+                            <p>                       
+                                <div class="source">
+<pre>
+ log4j.logger.persona=DEBUG, Console
+</pre>
+                                </div>
+                            </p>
+                        </li>
+                    </ul>
+                </p>
+                   
+            </subsection>
+        </section>
+    </body>
+</document>

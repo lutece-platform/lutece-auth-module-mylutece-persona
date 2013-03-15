@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <body>
+        <links>
+            <item name="EN" href="../index.html" />
+        </links>
+        
+        <menu name="Module Persona pour MyLutece">
+            <item name="Accueil" href="index.html"/>
+        </menu>
+        
+        <menu name="Téléchargements" inherit="bottom" >
+            <item name="Versions stables" href="../../../stable_builds/plugins/module-mylutece-persona/"/>
+            <item name="Nightly builds" href="../../../nightly_builds/plugins/module-mylutece-persona/" />
+        </menu>
+
+        <menu name="Liens Persona ">
+            <item name="Site Officiel Mozilla" href="http://www.mozilla.org/en-US/persona/" target="_blank"/>
+            <item name="Documentation Développeurs" href="https://developer.mozilla.org/fr/docs/Persona"  target="_blank"/>
+        </menu>	    
+        
+        <menu ref="reports" />
+    </body>
+</project>

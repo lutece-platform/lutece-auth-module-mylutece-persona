@@ -40,10 +40,9 @@ import net.sf.json.JSONSerializer;
 
 
 /**
- *
- * @author pierre
+ * Persona Utils
  */
-public class PersonaUtils
+public final class PersonaUtils
 {
     private static final String STATUS = "status";
     private static final String REASON = "reason";
@@ -52,6 +51,17 @@ public class PersonaUtils
     private static final String ISSUER = "issuer";
     private static final String EXPIRES = "expires";
 
+    /** Private constructor */
+    private PersonaUtils()
+    {
+        
+    }
+    
+    /**
+     * Parse the authentication response
+     * @param strJSON The response as JSON format
+     * @return A an authentication validation object
+     */
     public static PersonaAuthValidation parseResponse( String strJSON )
     {
         JSONObject jsonResponse = (JSONObject) JSONSerializer.toJSON( strJSON );

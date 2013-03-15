@@ -170,6 +170,10 @@ public class PersonaAuthValidation
         _strReason = strReason;
     }
 
+    /**
+     * Returns the authetication status
+     * @return true if Okay otherwise false
+     */
     public boolean isOK(  )
     {
         return _strStatus.equalsIgnoreCase( STATUS_OK );
