@@ -31,29 +31,39 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.mylutece.modules.persona.web;
+package fr.paris.lutece.plugins.mylutece.modules.persona.service;
 
-import fr.paris.lutece.plugins.mylutece.modules.persona.service.PersonaService;
+import fr.paris.lutece.plugins.mylutece.modules.persona.authentication.PersonaAuthValidation;
+import fr.paris.lutece.plugins.mylutece.modules.persona.authentication.PersonaAuthentication;
+import fr.paris.lutece.plugins.mylutece.modules.persona.authentication.PersonaUser;
+import fr.paris.lutece.portal.service.security.LuteceUser;
+import fr.paris.lutece.portal.service.security.SecurityService;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * AuthLoginServlet
+ *
+ * @author pierre
  */
-public class AuthLogoutServlet extends HttpServlet
+public class PersonaService
 {
-    @Override
-    protected void service( HttpServletRequest request, HttpServletResponse response )
-        throws ServletException, IOException
+    private static final PersonaAuthentication _authService = new PersonaAuthentication(  );
+
+    public static void processAuthentication( HttpServletRequest request, String strAuthResponse )
     {
-        System.out.println( "AuthLogout:doPost" );
-        PersonaService.processLogout( request );
-        super.service( request, response );
+        PersonaAuthValidation authValidation = PersonaUtils.parseResponse( strAuthResponse );
+
+        if ( authValidation.isOK(  ) )
+        {
+            PersonaUser user = new PersonaUser( authValidation.getEmail(  ), _authService );
+            user.setUserInfo( LuteceUser.BUSINESS_INFO_ONLINE_EMAIL, authValidation.getEmail(  ) );
+            SecurityService.getInstance(  ).registerUser( request, user );
+        }
+    }
+
+    public static void processLogout( HttpServletRequest request )
+    {
+        SecurityService.getInstance(  ).logoutUser( request );
     }
 }

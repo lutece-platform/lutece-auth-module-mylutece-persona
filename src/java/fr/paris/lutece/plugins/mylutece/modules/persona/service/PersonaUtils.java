@@ -31,29 +31,45 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.mylutece.modules.persona.web;
+package fr.paris.lutece.plugins.mylutece.modules.persona.service;
 
-import fr.paris.lutece.plugins.mylutece.modules.persona.service.PersonaService;
+import fr.paris.lutece.plugins.mylutece.modules.persona.authentication.PersonaAuthValidation;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 
 /**
- * AuthLoginServlet
+ *
+ * @author pierre
  */
-public class AuthLogoutServlet extends HttpServlet
+public class PersonaUtils
 {
-    @Override
-    protected void service( HttpServletRequest request, HttpServletResponse response )
-        throws ServletException, IOException
+    private static final String STATUS = "status";
+    private static final String REASON = "reason";
+    private static final String EMAIL = "email";
+    private static final String AUDIENCE = "audience";
+    private static final String ISSUER = "issuer";
+    private static final String EXPIRES = "expires";
+
+    public static PersonaAuthValidation parseResponse( String strJSON )
     {
-        System.out.println( "AuthLogout:doPost" );
-        PersonaService.processLogout( request );
-        super.service( request, response );
+        JSONObject jsonResponse = (JSONObject) JSONSerializer.toJSON( strJSON );
+        PersonaAuthValidation response = new PersonaAuthValidation(  );
+        response.setStatus( jsonResponse.getString( STATUS ) );
+
+        if ( response.getStatus(  ).equalsIgnoreCase( PersonaAuthValidation.STATUS_OK ) )
+        {
+            response.setEmail( jsonResponse.getString( EMAIL ) );
+            response.setAudience( jsonResponse.getString( AUDIENCE ) );
+            response.setIssuer( jsonResponse.getString( ISSUER ) );
+            response.setExpires( jsonResponse.getInt( EXPIRES ) );
+        }
+        else
+        {
+            response.setReason( jsonResponse.getString( REASON ) );
+        }
+
+        return response;
     }
 }

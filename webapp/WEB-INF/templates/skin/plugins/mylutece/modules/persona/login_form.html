@@ -4,8 +4,11 @@
     <br/>
     <br/>
 
-    <button id="sign-in"><img src="https://browserid.org/i/sign_in_blue.png" alt="Sign in"/> </button>
-    <button id="sign-out"><img src="https://browserid.org/i/sign_out_blue.png" alt="Sign out"/> </button>
+    <#if user_registered >
+        <button id="sign-out"><img src="https://browserid.org/i/sign_out_blue.png" alt="Sign out"/> </button>
+    <#else>
+        <button id="sign-in"><img src="https://browserid.org/i/sign_in_blue.png" alt="Sign in"/> </button>
+    </#if>
 </center>
 
 
@@ -24,9 +27,17 @@
     });
 
     function verifyAssertion(assertion) {
-        $.post("/lutece/servlet/plugins/mylutece/modules/persona/auth/login", {assertion: assertion}, function onSuccess(resp) {
+        $.post("servlet/plugins/mylutece/modules/persona/auth/login", {assertion: assertion}, function onSuccess(resp) {
             // maybe you return a json response including the email
             updateUser(resp.email);
+            document.location.reload();
+        });
+    }
+    ;
+
+    function logout() {
+        $.post("servlet/plugins/mylutece/modules/persona/auth/logout", {}, function onSuccess(resp) {
+            document.location.reload();
         });
     }
     ;
@@ -36,7 +47,7 @@
             verifyAssertion(assertion);
         },
         onlogout: function() {
-
+            logout();
         },
         loggedInUser: undefined
     });

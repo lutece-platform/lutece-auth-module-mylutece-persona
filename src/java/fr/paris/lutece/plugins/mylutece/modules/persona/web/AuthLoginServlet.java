@@ -30,19 +30,24 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */package fr.paris.lutece.plugins.mylutece.modules.persona.web;
+ */
+package fr.paris.lutece.plugins.mylutece.modules.persona.web;
 
+import fr.paris.lutece.plugins.mylutece.modules.persona.service.PersonaService;
+import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.util.httpaccess.HttpAccess;
 import fr.paris.lutece.util.httpaccess.HttpAccessException;
+
 import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * AuthLoginServlet
@@ -52,30 +57,32 @@ public class AuthLoginServlet extends HttpServlet
     private static final String PARAMETER_ASSERTION = "assertion";
     private static final String PARAMETER_AUDIENCE = "audience";
     private static final String URL_VERIFIER = "https://verifier.login.persona.org/verify";
-    
-    
+
     @Override
-    protected void service( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
+    protected void service( HttpServletRequest request, HttpServletResponse response )
+        throws ServletException, IOException
     {
         System.out.println( "AuthLogin:doPost" );
 
         super.service( request, response );
-        
+
         String strAssertion = request.getParameter( PARAMETER_ASSERTION );
-        Map<String, String> mapParams = new HashMap<String, String>();
-        strAssertion = "<ASSERTION>";
-        mapParams.put( PARAMETER_ASSERTION, strAssertion);
-        mapParams.put( PARAMETER_AUDIENCE, request.getScheme() + "://" + request.getServerName() + ":" + (request.getServerPort() == 80 ? "" : request.getServerPort()));
-        HttpAccess httpClient = new HttpAccess();
+        Map<String, String> mapParams = new HashMap<String, String>(  );
+        mapParams.put( PARAMETER_ASSERTION, strAssertion );
+        mapParams.put( PARAMETER_AUDIENCE,
+            request.getScheme(  ) + "://" + request.getServerName(  ) + ":" +
+            ( ( request.getServerPort(  ) == 80 ) ? "" : request.getServerPort(  ) ) );
+
+        HttpAccess httpClient = new HttpAccess(  );
+
         try
         {
-            String strResponse = httpClient.doPost(URL_VERIFIER, mapParams);
-            System.out.println( strResponse );
+            String strResponse = httpClient.doPost( URL_VERIFIER, mapParams );
+            PersonaService.processAuthentication( request, strResponse );
         }
-        catch (HttpAccessException ex)
+        catch ( HttpAccessException ex )
         {
-            Logger.getLogger(AuthLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            AppLogService.error( "Error processing Persona authentication : " + ex.getMessage(  ), ex );
         }
     }
-     
 }
