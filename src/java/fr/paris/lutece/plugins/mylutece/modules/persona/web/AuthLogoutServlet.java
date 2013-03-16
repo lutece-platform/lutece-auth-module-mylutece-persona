@@ -69,9 +69,7 @@ public class AuthLogoutServlet extends HttpServlet
         else
         {
             out.write( "No user to logout");
-            response.setStatus( HttpServletResponse.SC_BAD_REQUEST );
         }
-//        response.sendRedirect( "jsp/site/Portal.jsp" );
         out.flush();
         out.close();
 

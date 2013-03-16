@@ -63,7 +63,6 @@ public class AuthLoginServlet extends HttpServlet
     protected void service( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
-//        super.service( request, response );
 
         String strAssertion = request.getParameter( PARAMETER_ASSERTION );
         Map<String, String> mapParams = new HashMap<String, String>(  );
@@ -86,7 +85,7 @@ public class AuthLoginServlet extends HttpServlet
         catch ( HttpAccessException ex )
         {
             AppLogService.error( "Error processing Persona authentication : " + ex.getMessage(  ), ex );
-            out.write( "Authentication successful");
+            out.write( "Authentication failed : " + ex.getMessage() );
         }
         out.flush();
         out.close();

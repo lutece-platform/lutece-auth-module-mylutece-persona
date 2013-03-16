@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.mylutece.modules.persona.web;
 import fr.paris.lutece.plugins.mylutece.web.MyLuteceApp;
 import fr.paris.lutece.portal.service.i18n.I18nService;
 import fr.paris.lutece.portal.service.plugin.Plugin;
-import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
 import fr.paris.lutece.portal.web.xpages.XPage;
 import fr.paris.lutece.portal.web.xpages.XPageApplication;
@@ -65,7 +64,6 @@ public class PersonaApp implements XPageApplication
     // Markers
     private static final String MARK_ERROR_MESSAGE = "error_message";
     private static final String MARK_URL_DOLOGIN = "url_dologin";
-    private static final String MARK_USER_REGISTERED = "user_registered";
 
     // Actions
     private static final String ACTION_LOGIN = "login";
@@ -79,6 +77,7 @@ public class PersonaApp implements XPageApplication
      * @param plugin The current plugin
      * @return The XPage
      */
+    @Override
     public XPage getPage( HttpServletRequest request, int nMode, Plugin plugin )
     {
         XPage page = new XPage(  );
@@ -113,10 +112,8 @@ public class PersonaApp implements XPageApplication
             strErrorMessage = I18nService.getLocalizedString( strError, locale );
         }
 
-        boolean bUserRegistered = ( SecurityService.getInstance(  ).getRegisteredUser( request ) != null );
         model.put( MARK_ERROR_MESSAGE, strErrorMessage );
         model.put( MARK_URL_DOLOGIN, MyLuteceApp.getDoLoginUrl(  ) );
-        model.put( MARK_USER_REGISTERED, bUserRegistered );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_LOGIN_PAGE, locale, model );
 
