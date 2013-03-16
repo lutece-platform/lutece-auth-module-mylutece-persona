@@ -67,7 +67,8 @@ mylutece.authentication.enable=true
 mylutece.authentication.class=fr.paris.lutece.plugins.mylutece.modules.persona.authentication.PersonaAuthentication
 
 mylutece.url.login.page=Portal.jsp?page=persona
-mylutece.url.doLogout=servlet/plugins/mylutece/modules/persona/auth/logout
+mylutece.url.doLogin=jsp/site/plugins/mylutece/modules/persona/DoRedirectPersonaPage.jsp
+mylutece.url.doLogout=jsp/site/plugins/mylutece/modules/persona/DoRedirectPersonaPage.jsp
 mylutece.url.default.redirect=../../Portal.jsp
 </pre>
                     </div>

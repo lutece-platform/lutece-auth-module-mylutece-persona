@@ -34,8 +34,11 @@
 package fr.paris.lutece.plugins.mylutece.modules.persona.web;
 
 import fr.paris.lutece.plugins.mylutece.modules.persona.service.PersonaService;
+import fr.paris.lutece.portal.service.security.LuteceUser;
+import fr.paris.lutece.portal.service.security.SecurityService;
 
 import java.io.IOException;
+import java.io.Writer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +55,25 @@ public class AuthLogoutServlet extends HttpServlet
     protected void service( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
-        PersonaService.processLogout( request );
-        super.service( request, response );
+        response.setStatus( HttpServletResponse.SC_OK);
+        response.setContentType( "text/html");
+        Writer out = response.getWriter();
+
+        LuteceUser user = SecurityService.getInstance().getRegisteredUser( request );
+        if( user != null )
+        {
+            PersonaService.processLogout( request );
+            out.write( "Logout successful for user : " + user.getName() );
+            
+        }
+        else
+        {
+            out.write( "No user to logout");
+            response.setStatus( HttpServletResponse.SC_BAD_REQUEST );
+        }
+//        response.sendRedirect( "jsp/site/Portal.jsp" );
+        out.flush();
+        out.close();
+
     }
 }

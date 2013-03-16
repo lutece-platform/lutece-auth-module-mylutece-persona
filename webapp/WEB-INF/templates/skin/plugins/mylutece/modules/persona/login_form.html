@@ -5,17 +5,21 @@
     <img src="images/local/skin/plugins/mylutece/modules/persona/persona.png" alt="Mozilla's Persona logo" />
     <br/>
 
-    <#if user_registered >
+    <div id="logout">
         <button id="sign-out"><img src="https://browserid.org/i/sign_out_blue.png" alt="Sign out"/> </button>
-    <#else>
+    </div>
+    <div id="login">
         <button id="sign-in"><img src="https://browserid.org/i/sign_in_blue.png" alt="Sign in"/> </button>
-    </#if>
+    </div>
 </center>
 
 
 <script src="https://login.persona.org/include.js"></script>
 
 <script>
+
+
+
 
     $("#sign-in").click(function(e) {
         e.preventDefault();
@@ -29,16 +33,16 @@
 
     function verifyAssertion(assertion) {
         $.post("servlet/plugins/mylutece/modules/persona/auth/login", {assertion: assertion}, function onSuccess(resp) {
-            // maybe you return a json response including the email
-            updateUser(resp.email);
-            document.location.reload();
+            $("#login").hide();
+            $("#logout").show();
         });
     }
     ;
 
     function logout() {
         $.post("servlet/plugins/mylutece/modules/persona/auth/logout", {}, function onSuccess(resp) {
-            document.location.reload();
+            $("#login").show();
+            $("#logout").hide();
         });
     }
     ;
@@ -53,6 +57,8 @@
         loggedInUser: undefined
     });
 
+    $("#login").show();
+    $("#logout").hide();
 
 </script>
 

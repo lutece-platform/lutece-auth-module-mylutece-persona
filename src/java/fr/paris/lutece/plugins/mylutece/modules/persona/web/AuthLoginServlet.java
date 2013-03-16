@@ -39,6 +39,7 @@ import fr.paris.lutece.util.httpaccess.HttpAccess;
 import fr.paris.lutece.util.httpaccess.HttpAccessException;
 
 import java.io.IOException;
+import java.io.Writer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class AuthLoginServlet extends HttpServlet
     protected void service( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
-        super.service( request, response );
+//        super.service( request, response );
 
         String strAssertion = request.getParameter( PARAMETER_ASSERTION );
         Map<String, String> mapParams = new HashMap<String, String>(  );
@@ -73,14 +74,22 @@ public class AuthLoginServlet extends HttpServlet
 
         HttpAccess httpClient = new HttpAccess(  );
 
+        response.setStatus( HttpServletResponse.SC_OK);
+        response.setContentType( "text/html");
+        Writer out = response.getWriter();
         try
         {
             String strResponse = httpClient.doPost( URL_VERIFIER, mapParams );
             PersonaService.processAuthentication( request, strResponse );
+            out.write( "Authentication successful");
         }
         catch ( HttpAccessException ex )
         {
             AppLogService.error( "Error processing Persona authentication : " + ex.getMessage(  ), ex );
+            out.write( "Authentication successful");
         }
+        out.flush();
+        out.close();
+        
     }
 }
