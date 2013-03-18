@@ -46,7 +46,7 @@
     <properties>
         <componentName>mylutece-persona</componentName>
         <jiraProjectName>PERSONA</jiraProjectName>
-        <jiraComponentId>10100</jiraComponentId>
+        <jiraComponentId>11350</jiraComponentId>
     </properties>
 
     <scm>

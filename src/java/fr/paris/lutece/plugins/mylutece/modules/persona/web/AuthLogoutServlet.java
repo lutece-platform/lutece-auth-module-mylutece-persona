@@ -55,23 +55,24 @@ public class AuthLogoutServlet extends HttpServlet
     protected void service( HttpServletRequest request, HttpServletResponse response )
         throws ServletException, IOException
     {
-        response.setStatus( HttpServletResponse.SC_OK);
-        response.setContentType( "text/html");
-        Writer out = response.getWriter();
+        response.setStatus( HttpServletResponse.SC_OK );
+        response.setContentType( "text/html" );
 
-        LuteceUser user = SecurityService.getInstance().getRegisteredUser( request );
-        if( user != null )
+        Writer out = response.getWriter(  );
+
+        LuteceUser user = SecurityService.getInstance(  ).getRegisteredUser( request );
+
+        if ( user != null )
         {
             PersonaService.processLogout( request );
-            out.write( "Logout successful for user : " + user.getName() );
-            
+            out.write( "Logout successful for user : " + user.getName(  ) );
         }
         else
         {
-            out.write( "No user to logout");
+            out.write( "No user to logout" );
         }
-        out.flush();
-        out.close();
 
+        out.flush(  );
+        out.close(  );
     }
 }

@@ -39,8 +39,9 @@ import fr.paris.lutece.plugins.mylutece.modules.persona.authentication.PersonaUs
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
 
-import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -49,14 +50,13 @@ import org.apache.log4j.Logger;
 public final class PersonaService
 {
     private static final PersonaAuthentication _authService = new PersonaAuthentication(  );
-    private static Logger _logger = Logger.getLogger( "persona");
+    private static Logger _logger = Logger.getLogger( "persona" );
 
     /** private constructor */
-    private PersonaService()
+    private PersonaService(  )
     {
-        
     }
-    
+
     /**
      * Process the authentication
      * @param request The HTTP request
@@ -64,7 +64,8 @@ public final class PersonaService
      */
     public static void processAuthentication( HttpServletRequest request, String strAuthResponse )
     {
-        _logger.debug( "Process authentication response");
+        _logger.debug( "Process authentication response" );
+
         PersonaAuthValidation authValidation = PersonaUtils.parseResponse( strAuthResponse );
 
         if ( authValidation.isOK(  ) )
@@ -86,7 +87,7 @@ public final class PersonaService
      */
     public static void processLogout( HttpServletRequest request )
     {
-        _logger.debug( "Process logout");
+        _logger.debug( "Process logout" );
         SecurityService.getInstance(  ).logoutUser( request );
     }
 }

@@ -20,6 +20,12 @@
     <!-- if the plugin must have a connection pool with parameter : 1 - yes, 0 - no -->
     <db-pool-required>0</db-pool-required>
 
+    <!-- Specific plugin CSS stylesheets -->
+    <css-stylesheets>
+        <css-stylesheets-scope>portal</css-stylesheets-scope>
+        <css-stylesheet>mylutece/modules/persona/persona.css</css-stylesheet>
+    </css-stylesheets>
+
     <!-- Applications -->
     <applications>
         <application>

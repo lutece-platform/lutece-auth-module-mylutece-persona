@@ -52,11 +52,10 @@ public final class PersonaUtils
     private static final String EXPIRES = "expires";
 
     /** Private constructor */
-    private PersonaUtils()
+    private PersonaUtils(  )
     {
-        
     }
-    
+
     /**
      * Parse the authentication response
      * @param strJSON The response as JSON format

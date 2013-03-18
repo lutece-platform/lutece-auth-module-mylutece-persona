@@ -35,6 +35,7 @@ package fr.paris.lutece.plugins.mylutece.modules.persona.authentication;
 
 import fr.paris.lutece.portal.service.security.LuteceAuthentication;
 import fr.paris.lutece.portal.service.security.LuteceUser;
+
 import java.io.Serializable;
 
 
