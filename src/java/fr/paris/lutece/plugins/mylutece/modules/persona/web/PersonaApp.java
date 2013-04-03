@@ -37,6 +37,7 @@ import fr.paris.lutece.plugins.mylutece.web.MyLuteceApp;
 import fr.paris.lutece.portal.service.i18n.I18nService;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
+import fr.paris.lutece.portal.web.PortalJspBean;
 import fr.paris.lutece.portal.web.xpages.XPage;
 import fr.paris.lutece.portal.web.xpages.XPageApplication;
 import fr.paris.lutece.util.html.HtmlTemplate;
@@ -64,6 +65,7 @@ public class PersonaApp implements XPageApplication
     // Markers
     private static final String MARK_ERROR_MESSAGE = "error_message";
     private static final String MARK_URL_DOLOGIN = "url_dologin";
+    private static final String MARK_NEXT_URL = "next_url";
 
     // Actions
     private static final String ACTION_LOGIN = "login";
@@ -111,9 +113,12 @@ public class PersonaApp implements XPageApplication
         {
             strErrorMessage = I18nService.getLocalizedString( strError, locale );
         }
+        
+        String strNextUrl = PortalJspBean.getLoginNextUrl(request);
 
         model.put( MARK_ERROR_MESSAGE, strErrorMessage );
         model.put( MARK_URL_DOLOGIN, MyLuteceApp.getDoLoginUrl(  ) );
+        model.put( MARK_NEXT_URL, strNextUrl );
 
         HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_LOGIN_PAGE, locale, model );
 
