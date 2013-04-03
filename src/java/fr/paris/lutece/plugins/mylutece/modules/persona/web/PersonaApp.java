@@ -115,6 +115,11 @@ public class PersonaApp implements XPageApplication
         }
         
         String strNextUrl = PortalJspBean.getLoginNextUrl(request);
+        if( ( strNextUrl != null ) && (strNextUrl.contains( "page=persona" )))
+        {
+            strNextUrl = null;
+        }
+       
 
         model.put( MARK_ERROR_MESSAGE, strErrorMessage );
         model.put( MARK_URL_DOLOGIN, MyLuteceApp.getDoLoginUrl(  ) );
