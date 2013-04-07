@@ -37,6 +37,7 @@ import fr.paris.lutece.plugins.mylutece.authentication.PortalAuthentication;
 import fr.paris.lutece.portal.service.security.LoginRedirectException;
 import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import java.io.Serializable;
 
 import javax.security.auth.login.LoginException;
 
@@ -47,7 +48,7 @@ import javax.servlet.http.HttpServletRequest;
  * The Class provides an implementation of the inherited abstract class
  * PortalAuthentication based on OpenID
  */
-public class PersonaAuthentication extends PortalAuthentication
+public class PersonaAuthentication extends PortalAuthentication implements Serializable 
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Constants
