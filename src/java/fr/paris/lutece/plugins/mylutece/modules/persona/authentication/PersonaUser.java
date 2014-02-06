@@ -54,4 +54,13 @@ public class PersonaUser extends LuteceUser implements Serializable
         super( strUserName, authenticationService );
         this.setLuteceAuthenticationService( authenticationService );
     }
+    
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public String getEmail()
+    {
+        return getName();
+    }
 }
