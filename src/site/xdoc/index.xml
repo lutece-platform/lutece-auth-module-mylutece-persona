@@ -10,9 +10,9 @@
             </p>
             <subsection name="Introduction">
                 <p>This module let use Persona to authenticate users in Lutece</p>
-                <p>All users having an Persona account can be authenticated by this module. Users who have not already
+                <p>
+                    All users having an Persona account can be authenticated by this module. Users who have not already
                     an Persona should create one.
-                
                 </p>
                 <p>
                     For more information about Persona please refer to links provided in the side bar. 
@@ -25,33 +25,6 @@
                 <p>This module requires version 2.1.2 or higher of the Lutece kernel (lutece-core)</p>
                 <p>The plugin MyLutece should be installed in version 2.1.0 or higher</p>
             </subsection>
-            
-            
-            <subsection name="Build and deploy">
-                <p>
-                    To build the latest version just follow this steps 
-                </p>
-                <p>
-                    (NB: Subversion's client and Maven3 should be installed on your system)
-                </p>
-                <p>                       
-                    <div class="source">
-<pre>
-  $ svn export http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/module-mylutece-persona module-mylutece-persona
-  $ cd module-mylutece-persona
-  $ mvn lutece:assembly
-</pre>
-                    </div>
-                </p>
-                <p>
-                    The last command will build the module's package as an archive named <code>module-mylutece-persona-xxx-bin-xxxx.zip</code>
-                    in the directory <code>./target/assembly</code>
-                </p>
-                <p>
-                    To deploy this package, just extract its content in your webapp's root.
-                </p>
-
-            </subsection>
             <subsection name="Configuration">
                 <p>As soon as the module has been extracted in the webapp, just activate it in the "Plugins management" feature of the Lutece backoffice</p>
                 <p>
@@ -60,7 +33,7 @@
                 </p>
                 <p>                       
                     <div class="source">
-<pre>
+                        <pre>
 # Enable authentication
 mylutece.authentication.enable=true
 
@@ -70,7 +43,7 @@ mylutece.url.login.page=Portal.jsp?page=persona
 mylutece.url.doLogin=jsp/site/plugins/mylutece/modules/persona/DoRedirectPersonaPage.jsp
 mylutece.url.doLogout=jsp/site/plugins/mylutece/modules/persona/DoRedirectPersonaPage.jsp
 mylutece.url.default.redirect=../../Portal.jsp
-</pre>
+        </pre>
                     </div>
                 </p>
 
@@ -78,7 +51,7 @@ mylutece.url.default.redirect=../../Portal.jsp
             <subsection name="Usage">
                 <p>The Persona authentication page is called by the following URL :</p>
                 <p>
-                    <code>http://myhost/lutece/jsp/site/Portal.jsp?<strong>page=persona</strong></code>
+                    <code>http://myhost/lutece/jsp/site/Portal.jsp?page=persona</code>
                 </p>
                 <p>
                     You may create an authentication form in a portlet, by copying the form in an HTML portlet, or
@@ -99,9 +72,9 @@ mylutece.url.default.redirect=../../Portal.jsp
                             file <code>WEB-INF/conf/config.properties</code> in the LOGGERS bloc.
                             <p>                       
                                 <div class="source">
-<pre>
- log4j.logger.persona=DEBUG, Console
-</pre>
+                                    <pre>
+log4j.logger.persona=DEBUG, Console
+                                    </pre>
                                 </div>
                             </p>
                         </li>
